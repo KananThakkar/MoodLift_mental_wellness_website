@@ -2,7 +2,7 @@
 *{
     margin: 0;
     padding: 0;
-    font-family: "Dancing Script", cursive;
+    font-family: cursive;
 }
 header{
     font-size: 30px;
@@ -12,7 +12,8 @@ header{
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: teal;
+    background-color: #5C735F;
+    color: #FDF6EC;
 }
 header>h1{
     margin-left: 20px;
@@ -23,49 +24,52 @@ header>h1{
     width: 100%;
     height: 88vh;
     display: flex;
-    background-color: black;
+    background-color: #FDF6EC;
 }
 .left-div
 {
+    outline: none;
     width: 35%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    border-right: 1px solid rgb(39, 38, 38);
+    border-right: 2px solid #5C735F;
 }
 .left-div>h3{
     margin-top: 15px;
     font-size: 40px;
     font-weight: 200;
-    color: teal;
+    color: #5C735F;
 }
 .left-div>form{
+    border: none;
     height: 90%;
     width: 85%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    border: 1px solid;
 }
 .left-div>form>input{
     width: 85%;
     height: 35px;
-    border: none;
+    border: 2px solid #5C735F;
     border-radius: 5px;
     padding-left: 15px;
     font-size: 20px;
+    background-color: white;
 }  
 .left-div>form>textarea{
     width: 85%;
     height: 250px;
-    border: none;
+    border: 2px solid #5C735F;
     border-radius: 5px;
     padding-left: 15px;
     padding-top: 15px;
     font-size: 20px;
+    background-color: white;
 }
 .right-div{
     width: 65%;
@@ -94,15 +98,15 @@ header>h1{
 button{
     width: 100px;
     height: 35px;
-    background-color: teal;
+    background-color: #5C735F;
     border: none;
-    color: black;
+    color: white;
     border-radius: 5px;
     font-size: 20px;
 }
 button:hover{
-    color: white;
+    color: #FDF6EC;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid #FDF6EC;
 }
 

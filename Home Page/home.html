@@ -16,57 +16,115 @@
 </head>
 
 <body>
-    <header id="nav">
-      <section>
+    <nav id="nav">
         <button id="mbtn" onclick="toggleSidebar()"><i class="fa-solid fa-bars-sort"></i></button>
         <section id="menu">
-          <button id="mbtn" onclick="toggleSidebar()"><i class="fa-solid fa-bars-sort"></i></button>
-          <h3>save your notes <a href="../Notes Page/notes.html">></a></h3>
-          <h3>track your mood <a href="../Mood Tracker/mood.html">></a></h3>
-          <h3>logout
-             <section id="profile-block">
-                <p id="close">X</p>
-                <div id="uname"></div>
-                <div>
-                  <button id="lbtn">Logout</button>
-                </div>
-              </section>
-          </h3>
-        </section>
-      </section>  
-      <h1>Mood Lift</h1>
-      <h2>Your Mental Wellness Friend</h2>
-    </header>
+          <nav class="m"><button id="mbtn" onclick="toggleSidebar()"><i class="fa-solid fa-bars-sort"></i></button></nav>
+          <a href="../Notes Page/notes.html"><button>Save your notes</button></a>
+          <a href="../Mood Tracker/mood.html"><button>Track your mood</button></a>
+          <a href="../Login Page/login.html"><button>Logout</button></a>
+        </section>  
+      <h1>Mood Lift - Your Mental Wellness Friend</h1>
 
-    <main>
-      <h2>Select Your Mood</h2>
-      <div class="container">
-        <i href="angry.html"><img src="angry.png" height="300" width="300" alt="angry"></i>
-        <i href="anxiety.html"><img src="anxitey.png" height="300" width="300" alt="anxiety"></i>
-        <i href="bored.html"><img src="bored.png" height="300" width="300" alt="bored"></i>
-        <i href="disappointed.html"><img src="disappointed.png" height="300" width="300" alt="disappointed"></i>
-        <i href="confused.html"><img src="confused.png" height="300" width="300" alt="confused"></i>
-        <i href="affected.html"><img src="affected.png" height="300" width="300" alt="affected"></i>
-        <i href="guilt.html"><img src="guilt.png" height="300" width="300" alt="guilt"></i>
-        <i href="fear.html"><img src="fear.png" height="300" width="300" alt="fear"></i>
-        <i href="envy.html"><img src="envy.png" height="300" width="300" alt="envy"></i>
-        <i href="annoyed.html"><img src="annoyed.png" height="300" width="300" alt="annoyed"></i>
-        <i href="upset.html"><img src="upset.jpg" height="300" width="300" alt="upset"></i>
-      
-
-      </div>
-    </main>
+    </nav>
 
     <section class="main-container" id="main">
         <div id="product-block">
-          
+          <main>
+            <h2>Select Your Mood</h2>
+            <div class="container">
+              
+              <div class="mood">
+                <a href="./Mood Pages/angry.html">
+                  <img src="./Mood Pictures/angry.png" alt="angry">
+                  <span>Angry</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/anxiety.html">
+                  <img src="./Mood Pictures/anxitey.png" alt="anxiety">
+                  <span>Anxiety</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/bored.html">
+                  <img src="./Mood Pictures/bored.png" alt="bored">
+                  <span>Bored</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/confused.html">
+                  <img src="./Mood Pictures/confused.png" alt="confused">
+                  <span>Confused</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/disappointed.html">
+                  <img src="./Mood Pictures/disappointed.png" alt="disappointed">
+                  <span>Disappointed</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/affected.html">
+                  <img src="./Mood Pictures/affected.png" alt="affected">
+                  <span>Affected</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/fear.html">
+                  <img src="./Mood Pictures/fear.png" alt="fear">
+                  <span>Fear</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/guilt.html">
+                  <img src="./Mood Pictures/guilt.png" alt="guilt">
+                  <span>Guilt</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/annoyed.html">
+                  <img src="./Mood Pictures/annoyed.png" alt="annoyed">
+                  <span>Annoyed</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/envy.html">
+                  <img src="./Mood Pictures/envy.png" alt="envy">
+                  <span>Envy</span>
+                </a>
+              </div>
+
+              <div class="mood">
+                <a href="./Mood Pages/upset.html">
+                  <img src="./Mood Pictures/upset.jpg" alt="upset">
+                  <span>Upset</span>
+                </a>
+              </div>
+            </div>
+            <h2>Stories</h2>
+            <h2>Videos</h2>
+            <h2>Images</h2>
+            <h2>Songs</h2>
+            <h2>Mind Exercises</h2>
+            <h2>Yoga</h2>
+            <h2>Games</h2>
+          </main>
         </div>
     </section>
 
 
     <footer>
-      <a href="https://www.gmail.com" target="_blank"><li><i class="fa-solid fa-envelope"></i></li></a>
-          </ul>
+      <a href="https://www.gmail.com" target="_blank"><i class="fa-solid fa-envelope"></i></a>
           <ul>
             <li>Home</li>
             <li>Services</li>
@@ -76,9 +134,7 @@
           </ul>
           <p>copyright@2024 www.MoodLift.com All rights reserved.</p>
     </footer>
-            
-       
-    </section>  
+           
     <script src="./home.js"></script>
 </body>
 

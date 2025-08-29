@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affirmations - Disappointed</title>
+
+  <!-- Playful Handwriting Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+
+  <style>
+   
+
+body {
+  font-family: 'Patrick Hand', cursive;
+  background: #FDF6EC;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+h2 {
+    font-family: cursive;
+    font-size: 30px;
+    color: #5C735F;
+}
+/* Sticky notes wrapper */
+.notes-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* Always 3 per row */
+  gap: 2rem;                              /* Space between notes */
+  justify-items: center;
+  max-width: 1200px;
+  margin: 2rem auto;                      /* Center the grid */
+  padding: 1rem;
+}
+
+/* Individual sticky note */
+.note {
+  display: flex;
+  justify-content: center; /* Horizontal center */
+  align-items: center; 
+  width: 260px;
+  min-height: 200px;
+  background: #fffecf;
+  padding: 1.2rem;
+  font-size: 1.7rem;
+  line-height: 1.6;
+  border-radius: 10px;
+  box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+  position: relative;
+  transform: rotate(-1deg);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+/* Different colors for variety */
+.note:nth-child(2n) { background: #ffadad; transform: rotate(1deg); }
+    .note:nth-child(3n) { background: #caffbf; transform: rotate(-1.5deg); }
+    .note:nth-child(4n) { background: #9bf6ff; transform: rotate(2deg); }
+    .note:nth-child(5n) { background: #ffd6a5; transform: rotate(-2deg); }
+    .note:nth-child(6n) { background: #bdb2ff; transform: rotate(1.5deg); }
+
+/* Quotation marks */
+.note::before {
+  content: "“";
+  font-size: 2rem;
+  color: rgba(0,0,0,0.4);
+  position: absolute;
+  top: 8px;
+  left: 12px;
+}
+.note::after {
+  content: "”";
+  font-size: 2rem;
+  color: rgba(0,0,0,0.4);
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+}
+
+/* Sticky tape effect */
+    .note::before {
+      content: '';
+      position: absolute;
+      top: -12px;
+      left: 40%;
+      width: 50px;
+      height: 18px;
+      background: rgba(248, 231, 175, 0.7);
+      border-radius: 4px;
+      transform: rotate(-5deg);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>Affirmations for Disappointed</h2>
+
+  <div class="notes-container" id="notesContainer"></div>
+
+  <script>
+    const affirmations = [
+      "“It’s okay that things didn’t go as planned.”",
+      "“Every setback is a step toward growth.”",
+      "“I release expectations and accept the lesson.”",
+      "“I am learning patience through this moment.”",
+      "“Disappointment does not define me.”",
+      "“I trust that better days are ahead.”"
+    ];
+
+    const container = document.getElementById("notesContainer");
+
+    affirmations.forEach(text => {
+      const note = document.createElement("div");
+      note.className = "note";
+      note.textContent = text;
+      container.appendChild(note);
+    });
+  </script>
+
+</body>
+</html>
+
+
+
