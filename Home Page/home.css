@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Lobster", sans-serif;
+}
+body{
+    height: 100vh;
+    width: 100vw;
+}
+body>nav{
+    margin-left: 250px; /* default shifted to fit sidebar */
+    padding: 20px;
+    transition: margin-left 0.3s;
+    height: 12vh;
+    width: 100%;
+    background-color: palevioletred;
+    color: white;
+    display: flex;
+}
+nav>section:first-child{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+nav>section>h1{
+    padding-left: 30px;
+    font-size: 35px;
+    font-weight: 300;
+}
+nav>ul{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 25px;
+}
+nav>section:last-child{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+i{
+    font-size: 25px;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+    color: white;
+}
+#profile-block{
+    width: 200px;
+    height: 150px;
+    position: fixed;
+    top: 12vh;
+    right: 0;
+    background-color: palevioletred;
+    box-shadow: 0px 0px 5px white;
+    display: none;
+}
+#profile-block>div{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#profile-block>div>p{
+    font-size: 20px;
+}
+#profile-block>div>button{
+    width: 60%;
+    height: 35px;
+    background-color: white;
+    color: palevioletred;
+    border: none;
+    font-weight: 500;
+    font-size: 16px;
+}
+#profile-block>div>button:hover{
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+}
+#profile-block>p{
+    font-size: 20px;
+    font-weight: 700;
+    position: absolute;
+    top: 1vh;
+    right: 5px;
+}
+#profile-block>p:hover{
+    cursor: pointer;
+}
+#main{
+    height: 88vh;
+    overflow: auto;
+    width: 100%;
+}
+#product-block{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+#product-block>h2{
+    width: 100%;
+}
+#product-block>div{
+    width: 26%;
+    height: 400px;
+    margin: 30px 0px 30px 0px;
+    box-shadow: 0px 0px 5px palevioletred;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px;
+    text-align: center;
+}
+#product-block>div>div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+button{
+    height: 40px;
+    border: none;
+    background-color: palevioletred;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 300ms;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+button:hover{
+    background-color: transparent;
+    border: 1px solid palevioletred;
+    color: palevioletred;
+}
+footer{
+    height: 50vh;
+    width: 100%;
+    background-color: palevioletred;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+footer>ul:nth-child(2){
+    width: 30%;
+    height: 40px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+}
+footer>ul i{
+    font-size: 25px;
+}
+footer>ul:nth-child(3){
+    width: 60%;
+    height: 40px;
+    display: flex;
+    list-style: none;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+}
+/* Sidebar */
+    #menu {
+      height: 100%;
+      width: 250px;  /* default visible */
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: whitesmoke;
+      overflow-x: hidden;
+      transition: 0.3s;
+      padding-top: 60px;
+      color: black;
+    }
+
+    #menu h3 {
+      display: block;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: black;
+    }
+    #menu h3>a{
+        padding-left: 80px;
+        color: #000;
+    }
+
+
+    /* Main content */
+    .main-container {
+      margin-left: 250px; /* default shifted to fit sidebar */
+      padding: 20px;
+      transition: margin-left 0.3s;
+    }
+
+    /* Toggle button */
+    #mbtn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      font-size: 20px;
+      background: whitesmoke;
+      color: black;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 1000;
+    }
