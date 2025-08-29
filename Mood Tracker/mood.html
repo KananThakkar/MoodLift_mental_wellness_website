@@ -1,13 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Year in Pixels — Mood Tracker</title>
+  <style>
+    :root{
+      --cell-size:28px;
+      --gap:4px;
+      --accent:#333;
+      --bg:#f8f9fb;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--accent)}
+    .wrap{max-width:980px;margin:28px auto;padding:20px;background:white;border-radius:10px;box-shadow:0 6px 30px rgba(10,10,20,0.06)}
+    h1{margin:0 0 12px;font-weight:700;letter-spacing:2px}
+    .top{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+    .controls{margin-left:auto;display:flex;gap:8px;align-items:center}
+    select,button{padding:6px 10px;border-radius:8px;border:1px solid #ddd;background:white}
+
+    .gridWrap{display:flex;gap:18px;margin-top:18px}
+    .monthLabels{display:grid;grid-template-columns:repeat(12, var(--cell-size));gap:var(--gap);align-items:center}
+    .monthLabels div{font-size:11px;text-align:center;color:#444}
+
+    .leftLabels{display:grid;grid-auto-rows:var(--cell-size);gap:var(--gap);margin-right:8px}
+    .leftLabels div{height:var(--cell-size);display:flex;align-items:center;justify-content:center;font-size:11px;color:#666}
+
+    .grid{display:grid;grid-template-columns:repeat(12, var(--cell-size));gap:var(--gap);}
+    .cell{width:var(--cell-size);height:var(--cell-size);border-radius:6px;border:1px solid #e3e6ea;background:white;cursor:pointer;box-sizing:border-box}
+    .cell:hover{transform:translateY(-2px);transition:all .12s}
+
+    .legend{margin-left:24px;border-left:1px dashed #eee;padding-left:18px}
+    .legend h3{margin:0 0 8px;font-size:14px}
+    .moodItem{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .swatch{width:20px;height:20px;border-radius:4px;border:1px solid rgba(0,0,0,0.06)}
+    .actions{display:flex;gap:8px;margin-top:12px}
+    .small{font-size:13px;padding:6px 8px}
+    footer{margin-top:18px;color:#666;font-size:13px}
+
+    @media (max-width:820px){.gridWrap{flex-direction:column}.legend{margin-left:0;border-left:none;padding-left:0}}
+  </style>
 </head>
 <body>
-    <h1>Mood Tracker</h1>
-    <p>Track your mood over time</p>
-    
+  <div class="wrap">
+    <div class="top">
+      <h1>Year-in-Pixels Mood Tracker</h1>
+      <div class="controls">
+        <label for="year">Year</label>
+        <select id="year"></select>
+        <button id="clear" title="Clear year" class="small">Clear</button>
+        <button id="export" class="small">Export JSON</button>
+        <input type="file" id="importFile" style="display:none" />
+        <button id="import" class="small">Import</button>
+      </div>
+    </div>
+
+    <div class="gridWrap">
+      <div>
+        <div class="monthLabels" id="months"></div>
+        <div style="display:flex;gap:10px;margin-top:8px">
+          <div class="leftLabels" id="days"></div>
+          <div class="grid" id="grid"></div>
+        </div>
+      </div>
+
+      <aside class="legend" aria-label="Mood legend">
+        <h3>Legend</h3>
+        <div id="legendItems"></div>
+        <div class="actions">
+          <button id="prevYear" class="small">◀ Prev</button>
+          <button id="nextYear" class="small">Next ▶</button>
+        </div>
+      </aside>
+    </div>
+
+    <footer>Click a cell to cycle moods. Data is saved locally in your browser (localStorage).</footer>
+  </div>
+
+  <script>
+    // Configurable moods: label and color (hex). Order defines the cycle when clicking a cell.
+    const MOODS = [
+      {key:'none', label:'—', color:'#ffffff'},
+      {key:'amazing', label:'Amazing', color:'#ffd6e0'},
+      {key:'excited', label:'Excited', color:'#cdb4ff'},
+      {key:'motivated', label:'Motivated', color:'#ffd966'},
+      {key:'productive', label:'Productive', color:'#5eead4'},
+      {key:'normal', label:'Normal', color:'#d9ffb3'},
+      {key:'tired', label:'Tired', color:'#bfc7a6'},
+      {key:'frustrated', label:'Frustrated', color:'#d98b5b'},
+      {key:'overwhelmed', label:'Overwhelmed', color:'#ffb86b'},
+      {key:'anxious', label:'Anxious', color:'#a6f0ff'},
+      {key:'sad', label:'Sad', color:'#7fb3ff'},
+      {key:'stressed', label:'Stressed', color:'#f0d9c8'},
+      {key:'annoyed', label:'Annoyed', color:'#ffffff', border:'#666'},
+      {key:'sick', label:'Sick', color:'#000000'}
+    ];
+
+    const months = ['J','F','M','A','M','J','J','A','S','O','N','D'];
+    const grid = document.getElementById('grid');
+    const monthsEl = document.getElementById('months');
+    const daysEl = document.getElementById('days');
+    const legendEl = document.getElementById('legendItems');
+    const yearSelect = document.getElementById('year');
+    const prevBtn = document.getElementById('prevYear');
+    const nextBtn = document.getElementById('nextYear');
+    const clearBtn = document.getElementById('clear');
+    const exportBtn = document.getElementById('export');
+    const importBtn = document.getElementById('import');
+    const importFile = document.getElementById('importFile');
+
+    const today = new Date();
+    let currentYear = today.getFullYear();
+    const STORAGE_PREFIX = 'yearInPixels-';
+
+    function initYearSelect(){
+      const start = currentYear - 5;
+      for(let y = start; y <= currentYear+5; y++){
+        const opt = document.createElement('option');opt.value = y;opt.textContent = y;
+        if(y===currentYear) opt.selected = true;
+        yearSelect.appendChild(opt);
+      }
+      yearSelect.addEventListener('change',()=>{currentYear = parseInt(yearSelect.value);render();});
+    }
+
+    function buildLegend(){
+      legendEl.innerHTML = '';
+      MOODS.slice(1).forEach(m=>{
+        const r = document.createElement('div');r.className='moodItem';
+        const s = document.createElement('div');s.className='swatch';s.style.background = m.color;
+        if(m.border) s.style.border = '1px solid '+m.border;
+        const t = document.createElement('div');t.textContent = m.label; t.style.fontSize='13px';
+        r.appendChild(s);r.appendChild(t);legendEl.appendChild(r);
+      });
+    }
+
+    function daysInMonth(y,m){return new Date(y,m+1,0).getDate();}
+
+    function keyFor(y){return STORAGE_PREFIX + y;}
+
+    function loadData(y){
+      try{
+        const raw = localStorage.getItem(keyFor(y));
+        return raw ? JSON.parse(raw) : {};
+      }catch(e){return {};}
+    }
+    function saveData(y,data){localStorage.setItem(keyFor(y), JSON.stringify(data));}
+
+    function render(){
+      grid.innerHTML='';monthsEl.innerHTML='';daysEl.innerHTML='';
+      for(let i=0;i<12;i++){const mdiv=document.createElement('div');mdiv.textContent=months[i];monthsEl.appendChild(mdiv);}      
+
+      const data = loadData(currentYear);
+      const maxRows = 31; // show days 1..31 vertically
+      for(let d=1; d<=maxRows; d++){
+        const dayLabel = document.createElement('div');dayLabel.textContent=d;daysEl.appendChild(dayLabel);
+      }
+
+      for(let m=0;m<12;m++){
+        const dim = daysInMonth(currentYear,m);
+        for(let d=1;d<=31;d++){
+          const cell = document.createElement('button');
+          cell.className='cell';
+          cell.dataset.month = m;
+          cell.dataset.day = d;
+          cell.setAttribute('aria-label', `Day ${d} of month ${m+1}`);
+          // hide days that don't exist in that month
+          if(d>dim){cell.style.visibility='hidden';cell.disabled=true;}
+
+          const key = `${m+1}-${d}`;
+          const moodKey = data[key] || 'none';
+          applyMoodToCell(cell,moodKey);
+
+          cell.addEventListener('click', ()=>{
+            const currentMoodIndex = MOODS.findIndex(x=>x.key=== (data[key] || 'none'));
+            const nextIndex = (currentMoodIndex + 1) % MOODS.length;
+            const nextMood = MOODS[nextIndex];
+            if(nextMood.key==='none') delete data[key]; else data[key]=nextMood.key;
+            applyMoodToCell(cell,nextMood.key);
+            saveData(currentYear,data);
+          });
+
+          grid.appendChild(cell);
+        }
+      }
+    }
+
+    function applyMoodToCell(cell, moodKey){
+      const mood = MOODS.find(m=>m.key===moodKey) || MOODS[0];
+      cell.style.background = mood.color || '#fff';
+      if(moodKey === 'annoyed') cell.style.border = '1px solid #666'; else cell.style.border='1px solid #e3e6ea';
+      // For better contrast when using black swatch for 'sick'
+      if(mood.color === '#000000'){
+        cell.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.06)';
+      } else cell.style.boxShadow='none';
+    }
+
+    // Controls
+    prevBtn.addEventListener('click',()=>{currentYear--; yearSelect.value = currentYear; render();});
+    nextBtn.addEventListener('click',()=>{currentYear++; yearSelect.value = currentYear; render();});
+    clearBtn.addEventListener('click',()=>{if(confirm('Clear all saved moods for '+currentYear+'?')){localStorage.removeItem(keyFor(currentYear));render();}});
+
+    exportBtn.addEventListener('click', ()=>{
+      const payload = {year:currentYear,data:loadData(currentYear)};
+      const blob = new Blob([JSON.stringify(payload, null, 2)],{type:'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');a.href = url; a.download = `mood-${currentYear}.json`; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+    });
+
+    importBtn.addEventListener('click', ()=>importFile.click());
+    importFile.addEventListener('change', (e)=>{
+      const f = e.target.files[0]; if(!f) return; const r = new FileReader();
+      r.onload = ev => {
+        try{
+          const obj = JSON.parse(ev.target.result);
+          if(obj.year && obj.data){localStorage.setItem(keyFor(obj.year), JSON.stringify(obj.data)); alert('Imported for '+obj.year); if(obj.year==currentYear) render();}
+          else alert('Invalid file format');
+        }catch(err){alert('Could not parse file');}
+      };
+      r.readAsText(f);
+      importFile.value = '';
+    });
+
+    // init
+    initYearSelect(); buildLegend(); render();
+  </script>
 </body>
 </html>

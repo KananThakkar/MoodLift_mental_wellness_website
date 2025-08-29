@@ -51,7 +51,7 @@ main>div {
   font-size: 30px;
   text-align: center;
 }
-main>div>img{
+main>div>i>img{
 
     opacity: 0.4;
     margin: 30px;
