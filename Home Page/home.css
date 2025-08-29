@@ -19,6 +19,47 @@ body>nav{
     color: white;
     display: flex;
 }
+header{
+    background-color:  palevioletred;
+    color: white;
+}
+header>nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0px 80px;
+    background-color: #000;
+}
+header>nav>button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0px 10px;
+}
+header>nav>button:hover{
+    color: palevioletred;
+}
+header>nav>button:focus{
+    outline: none;
+}
+main>div {
+  
+  border: 1px solid black;
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+main>div>img{
+
+    opacity: 0.4;
+    margin: 30px;
+}
+
+
+
+/*
 nav>section:first-child{
     height: 100%;
     width: 20%;
@@ -26,11 +67,16 @@ nav>section:first-child{
     align-items: center;
     justify-content: center; 
 }
-nav>section>h1{
+nav>h1{
     padding-left: 30px;
     font-size: 35px;
     font-weight: 300;
 }
+nav>h2{
+    padding-left: 30px;
+    font-size: 20px;
+    font-weight: 300;
+}   
 nav>ul{
     width: 50%;
     height: 100%;
@@ -150,7 +196,7 @@ button:hover{
     background-color: transparent;
     border: 1px solid palevioletred;
     color: palevioletred;
-}
+}*/
 footer{
     height: 50vh;
     width: 100%;

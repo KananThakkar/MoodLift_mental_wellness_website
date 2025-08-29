@@ -16,42 +16,56 @@
 </head>
 
 <body>
-    <nav id="nav">
+    <header id="nav">
       <section>
         <button id="mbtn" onclick="toggleSidebar()"><i class="fa-solid fa-bars-sort"></i></button>
         <section id="menu">
           <button id="mbtn" onclick="toggleSidebar()"><i class="fa-solid fa-bars-sort"></i></button>
           <h3>save your notes <a href="../Notes Page/notes.html">></a></h3>
-        </section>
-        <h1>Mood Lift</h1>
-      </section>
-      <ul>
-        <a href="./home.html"><li>Home</li></a>
-        <a href="../About Page/about.html"><li>About</li></a>
-        <a href="../Contact Page/contact.html"><li>Contact</li></a>
-      </ul>
-      <section>
-        <i class="fa-duotone fa-user" id="profile-icon"></i>
-        <section id="profile-block">
-          <p id="close">X</p>
-          <div id="uname"></div>
-          <div>
-            <button id="lbtn">Logout</button>
-          </div>
+          <h3>track your mood <a href="../Mood Tracker/mood.html">></a></h3>
+          <h3>logout
+             <section id="profile-block">
+                <p id="close">X</p>
+                <div id="uname"></div>
+                <div>
+                  <button id="lbtn">Logout</button>
+                </div>
+              </section>
+          </h3>
         </section>
       </section>  
-    </nav>
+      <h1>Mood Lift</h1>
+      <h2>Your Mental Wellness Friend</h2>
+    </header>
+
+    <main>
+      <h2>Select Your Mood</h2>
+      <div class="container">
+        <i href=""><img src="angry.png" height="300" width="300" alt="angry"></i>
+        <img src="anxitey.png" height="300" width="300" alt="angry">
+        <img src="bored.png" height="300" width="300" alt="angry">
+        <img src="disappointed.png" height="300" width="300" alt="angry">
+        <img src="confused.png" height="300" width="300" alt="angry">
+        <img src="affected.png" height="300" width="300" alt="angry">
+        <img src="guilt.png" height="300" width="300" alt="angry">
+        <img src="fear.png" height="300" width="300" alt="angry">
+        <img src="envy.png" height="300" width="300" alt="angry">
+        <img src="annoyed.png" height="300" width="300" alt="angry">
+        <img src="upset.jpg" height="300" width="300" alt="angry">
+      
+
+      </div>
+    </main>
+
     <section class="main-container" id="main">
         <div id="product-block">
-          <h2>Select Your Mood</h2>
+          
         </div>
-        <footer>
-          <h1>Mood Lift</h1>
-          <ul>
-            <a href="https://twitter.com" target="_blank"><li><i class="fa-brands fa-x-twitter"></i></li></a>
-            <a href="https://www.facebook.com" target="_blank"><li><i class="fa-brands fa-square-facebook"></i></li></a>
-            <a href="https://www.instagram.com" target="_blank"><li><i class="fa-brands fa-square-instagram"></i></li></a>
-            <a href="https://www.gmail.com" target="_blank"><li><i class="fa-solid fa-envelope"></i></li></a>
+    </section>
+
+
+    <footer>
+      <a href="https://www.gmail.com" target="_blank"><li><i class="fa-solid fa-envelope"></i></li></a>
           </ul>
           <ul>
             <li>Home</li>
@@ -61,7 +75,9 @@
             <li>Feedback</li>
           </ul>
           <p>copyright@2024 www.MoodLift.com All rights reserved.</p>
-        </footer>
+    </footer>
+            
+       
     </section>  
     <script src="./home.js"></script>
 </body>
