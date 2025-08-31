@@ -271,19 +271,22 @@ footer>ul:nth-child(3){
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #FFFAF0;
+      background-color: #5C735F;
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
-      color: black;
-      border-right: 2px solid #5C735F;
+      color: black;;
     }
 
-    #menu button>a {
-      display: block;
+    #menu a>button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 10px 20px;
       text-decoration: none;
-      color: black;
+      color: #5C735F;
+      background-color: #FDF6EC;
+      text-align: center;
     }
     
 
