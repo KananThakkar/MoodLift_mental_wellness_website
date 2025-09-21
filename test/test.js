@@ -1,36 +1,3 @@
-let username=localStorage.getItem('userfullname')
-let unameblk=document.getElementById('uname')
-
-
-let p_icon=document.getElementById('profile-icon')
-let p_block=document.getElementById('profile-block')
-
-let l_btn=document.getElementById('lbtn')
-
-
-
-
-let m_btn=document.getElementById('mbtn')
-let menu=document.getElementById('menu')       
-m_btn.addEventListener('click',()=>{
-    menu.classList.toggle("active")
-})
-function toggleSidebar() {
-      let sidebar = document.getElementById("menu");
-      let main = document.getElementById("main");
-      let nav = document.getElementById("nav");
-      if (sidebar.style.width === "0px") {
-        sidebar.style.width = "250px";
-        main.style.marginLeft = "250px";
-        nav.style.marginLeft = "250px";
-      } else {
-        sidebar.style.width = "0px";
-        main.style.marginLeft = "0px";
-        nav.style.marginLeft = "0px";
-      }
-}
-
-
 
 const API_KEY = 'VrzngQzv2f12Yx0A4gexwxTBZLVcwynONmclhZGXuyW8fmZolJViHdH1';  // Replace with your Pexels API Key
 const query = 'nature, calm, forest, relaxation'; // Soothing keywords

@@ -234,6 +234,76 @@ button:hover{
     border: 1px solid #5C735F;
     color: #5C735F;
 }*/
+#videos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.video-card {
+  width: 320px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease-in-out;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+}
+
+.video-card video {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.video-card p {
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+}
+
+/* Images container */
+.images-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Individual image cards */
+.image-card {
+    flex: 1 1 calc(25% - 15px);
+    max-width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.image-card p {
+    margin: 8px;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+}
+
 footer{
     height: 25vh;
     width: 100%;
