@@ -90,6 +90,75 @@ h2 {
       border-radius: 4px;
       transform: rotate(-5deg);
     }
+#videos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px;
+}
+
+.video-card {
+  width: 320px;
+  background: #f5f5f5;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease-in-out;
+}
+
+.video-card:hover {
+  transform: scale(1.03);
+}
+
+.video-card video {
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.video-card p {
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+  color: #333;
+}
+
+/* Images container */
+.images-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* Individual image cards */
+.image-card {
+    flex: 1 1 calc(25% - 15px);
+    max-width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.image-card p {
+    margin: 8px;
+    font-size: 0.9rem;
+    color: #333;
+    text-align: center;
+}
 
   </style>
 </head>
@@ -98,6 +167,15 @@ h2 {
   <h2>Affirmations for Annoyed</h2>
 
   <div class="notes-container" id="notesContainer"></div>
+  <h2>Stories</h2>
+            <h2>Videos</h2>
+            <div id="videos-container" class="videos-container"></div>
+            <h2>Images</h2>
+            <div id="images-container" class="images-container"></div>
+            <h2>Songs</h2>
+            <h2>Mind Exercises</h2>
+            <h2>Yoga</h2>
+            <h2>Games</h2>
 
   <script>
     const affirmations = [
@@ -117,6 +195,90 @@ h2 {
       note.textContent = text;
       container.appendChild(note);
     });
+    const API_KEY = 'VrzngQzv2f12Yx0A4gexwxTBZLVcwynONmclhZGXuyW8fmZolJViHdH1';  // Replace with your Pexels API Key
+const query = 'relaxation, gentle breeze, satisfying visuals, calming patterns, soothing music, meditation, slow nature scenes, quiet forest, peaceful vibes, patience, unwind, soft focus'; // Soothing keywords
+const perPage = 12; // Number of images to fetch
+
+async function fetchPexelsImages() {
+    try {
+        const res = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}`, {
+            headers: {
+                Authorization: API_KEY
+            }
+        });
+
+        const data = await res.json();
+        const container = document.getElementById('images-container');
+        console.log("Container:", container);  // Should NOT be null
+        console.log("API Response:", data);   
+        // Clear previous images
+
+        data.photos.forEach(photo => {
+            const card = document.createElement('div');
+            card.classList.add('image-card');
+
+            card.innerHTML = `
+                <img src="${photo.src.medium}" alt="${photo.alt}">
+                <p>${photo.photographer}</p>
+            `;
+
+            container.appendChild(card);
+        });
+
+    } catch (err) {
+        console.error('Error fetching images:', err);
+    }
+}
+
+// Call the function when page loads
+window.addEventListener('DOMContentLoaded', fetchPexelsImages);
+
+async function fetchPexelsVideos() {
+  try {
+    const res = await fetch(
+      `https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&per_page=${perPage}`,
+      {
+        headers: { Authorization: API_KEY }
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log("Video Data:", data);
+
+    const container = document.getElementById("videos-container");
+    container.innerHTML = "";
+
+    data.videos.forEach(video => {
+      // Pick a small/medium quality file for faster loading
+      const videoFile = video.video_files.find(
+        file => file.quality === "sd" && file.width <= 640
+      );
+
+      if (videoFile) {
+        const card = document.createElement("div");
+        card.classList.add("video-card");
+
+        card.innerHTML = `
+          <video controls>
+            <source src="${videoFile.link}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>Video by ${video.user.name}</p>
+        `;
+
+        container.appendChild(card);
+      }
+    });
+  } catch (err) {
+    console.error("Error fetching videos:", err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", fetchPexelsVideos);
   </script>
 
 </body>

@@ -33,8 +33,8 @@ function toggleSidebar() {
 
 
 const API_KEY = 'VrzngQzv2f12Yx0A4gexwxTBZLVcwynONmclhZGXuyW8fmZolJViHdH1';  // Replace with your Pexels API Key
-const query = 'nature, calm, forest, relaxation'; // Soothing keywords
-const perPage = 8; // Number of images to fetch
+const query = 'mental wellness, calm, relaxation, mindfulness, nature, positive vibes, healing, peaceful, meditation, stress relief, self-care, happy life, soothing music, positive quotes, breathing exercises, yoga'; // Soothing keywords
+const perPage = 12; // Number of images to fetch
 
 async function fetchPexelsImages() {
     try {
@@ -69,3 +69,50 @@ async function fetchPexelsImages() {
 
 // Call the function when page loads
 window.addEventListener('DOMContentLoaded', fetchPexelsImages);
+
+async function fetchPexelsVideos() {
+  try {
+    const res = await fetch(
+      `https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&per_page=${perPage}`,
+      {
+        headers: { Authorization: API_KEY }
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    const data = await res.json();
+    console.log("Video Data:", data);
+
+    const container = document.getElementById("videos-container");
+    container.innerHTML = "";
+
+    data.videos.forEach(video => {
+      // Pick a small/medium quality file for faster loading
+      const videoFile = video.video_files.find(
+        file => file.quality === "sd" && file.width <= 640
+      );
+
+      if (videoFile) {
+        const card = document.createElement("div");
+        card.classList.add("video-card");
+
+        card.innerHTML = `
+          <video controls>
+            <source src="${videoFile.link}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <p>Video by ${video.user.name}</p>
+        `;
+
+        container.appendChild(card);
+      }
+    });
+  } catch (err) {
+    console.error("Error fetching videos:", err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", fetchPexelsVideos);

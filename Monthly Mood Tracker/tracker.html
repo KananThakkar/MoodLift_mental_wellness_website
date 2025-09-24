@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Monthly Mood Tracker — 4 rings</title>
+<link rel="stylesheet" href="./tracker.css">
+</head>
+<body>
+  <div class="page">
+    <div class="card" role="region" aria-label="Mood tracker">
+      <div class="wheel-wrap">
+        <svg id="wheelSvg" viewBox="0 0 600 600" width="520" height="520" role="img" aria-label="Mood wheel"></svg>
+        <div class="center-text" aria-hidden="true">
+          <h2 id="centerMonth">Month</h2>
+          <p id="centerYear">Year</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel" role="region" aria-label="Controls">
+      <div>
+        <div class="title">Monthly Mood Tracker</div>
+      </div>
+
+      <div class="mood-list" id="moodList" role="list">
+        <!-- moods populated by JS -->
+      </div>
+
+      <div class="legend" aria-hidden="false">
+        <div style="font-weight:700">Time-of-day rings (inner → outer):</div>
+        <div class="legend-row"><span class="legend-sq" style="background:#FFF1C6"></span> Morning (hours 0–5)</div>
+        <div class="legend-row"><span class="legend-sq" style="background:#E8F7E9"></span> Afternoon (hours 6–11)</div>
+        <div class="legend-row"><span class="legend-sq" style="background:#E6F0FF"></span> Evening (hours 12–17)</div>
+        <div class="legend-row"><span class="legend-sq" style="background:#F6E8FF"></span> Night (hours 18–23)</div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="saveBtn">Save Tracker as Image</button>
+        <button class="btn ghost" id="viewBtn">View Saved Trackers</button>
+        <div class="hint">Tip: clear a filled slot with <strong>Alt/Ctrl + click</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+<script src="tracker.js"></script>
+</body>
+</html>

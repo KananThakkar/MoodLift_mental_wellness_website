@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Saved Trackers</title>
+<style>
+  body{font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;margin:0;background:#fbf8fd;color:#39263b}
+  header{display:flex;align-items:center;gap:12px;padding:14px 20px;background:linear-gradient(90deg,#fff,#faf7fb);box-shadow:0 6px 20px rgba(82,41,112,0.03)}
+  .back{padding:8px 12px;border-radius:9px;border:1px solid #efe6f5;background:#fff;cursor:pointer}
+  .container{padding:26px;max-width:1100px;margin:0 auto}
+  .grid{display:flex;flex-wrap:wrap;gap:18px}
+  .card{width:340px;background:#fff;padding:12px;border-radius:12px;border:1px solid #efe6f5;box-shadow:0 10px 30px rgba(82,41,112,0.03);display:flex;flex-direction:column;gap:8px}
+  .card img{width:100%;border-radius:8px}
+  .meta{font-size:13px;color:#7b637b}
+  .row{display:flex;gap:8px}
+  .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
+  .btn.dl{background:#6f3a82;color:#fff}
+  .btn.del{background:#fff;border:1px solid #efe6f5;color:#6f3a82}
+  .empty{padding:28px;border-radius:10px;background:#fff;border:1px dashed #efe6f5;text-align:center;color:#7b637b}
+</style>
+</head>
+<body>
+  <header>
+    <button class="back" onclick="location.href='tracker.html'">←</button>
+    <h2 style="margin:0;color:#6f3a82">Saved Trackers</h2>
+  </header>
+
+  <div class="container">
+    <div id="gallery" class="grid"></div>
+    <div id="empty" class="empty" style="display:none">No saved trackers yet. Save one from the tracker page.</div>
+    <div style="margin-top:18px">
+      <button id="clearAll" class="btn del">Delete All Saved</button>
+    </div>
+  </div>
+
+<script>
+const STORAGE_KEY = 'savedTrackers_v1';
+const gallery = document.getElementById('gallery');
+const empty = document.getElementById('empty');
+const clearAll = document.getElementById('clearAll');
+
+function loadSaved(){
+  gallery.innerHTML = '';
+  const arr = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  if (!arr || arr.length === 0){
+    empty.style.display = 'block';
+    clearAll.disabled = true;
+    return;
+  }
+  empty.style.display = 'none';
+  clearAll.disabled = false;
+
+  // show newest first
+  arr.slice().reverse().forEach((item, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'card';
+    const img = document.createElement('img'); 
+    img.src = item.data;
+    const meta = document.createElement('div'); 
+    meta.className = 'meta';
+    meta.textContent = new Date(item.date).toLocaleString();
+
+    const row = document.createElement('div'); 
+    row.className = 'row';
+    const dl = document.createElement('button'); 
+    dl.className = 'btn dl'; 
+    dl.textContent = 'Download';
+    dl.addEventListener('click', ()=>{
+      const a = document.createElement('a'); 
+      a.href = item.data; 
+      a.download = `tracker-${new Date(item.date).toISOString().slice(0,10)}.png`;
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+
+    const del = document.createElement('button'); del.className = 'btn del'; del.textContent = 'Delete';
+    del.addEventListener('click', ()=>{
+      const all = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      // convert reverse index back
+      const indexInAll = all.length - 1 - idx;
+      all.splice(indexInAll,1);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      loadSaved();
+    });
+
+    row.appendChild(dl); 
+    row.appendChild(del);
+
+    card.appendChild(img); 
+    card.appendChild(meta); 
+    card.appendChild(row);
+    gallery.appendChild(card);
+  });
+}
+
+clearAll.addEventListener('click', ()=>{
+  if (!confirm('Delete all saved trackers? This cannot be undone.')) return;
+  localStorage.removeItem(STORAGE_KEY);
+  loadSaved();
+});
+
+loadSaved();
+</script>
+</body>
+</html>
