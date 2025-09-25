@@ -10,6 +10,7 @@
 
   <style>
    
+   
 
 body {
   font-family: 'Patrick Hand', cursive;
@@ -159,6 +160,15 @@ h2 {
     color: #333;
     text-align: center;
 }
+.anger{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 20px;
+
+}
+
+
+
 
   </style>
 </head>
@@ -167,11 +177,32 @@ h2 {
   <h2>Affirmations for Anger</h2>
 
   <div class="notes-container" id="notesContainer"></div>
+
+
             <h2>Stories</h2>
-            <div id="dataContainer"></div>
-                <a href="./angry_s.html">
-                  <img src="./calm_river.png" alt="calm_river" style="width: 50px; height: 50px;">
+            <div class="anger">
+                 <a href="./19.html">
+                  <img src="./19.png" alt="calm_river" style="width: 300px; height: 300px;">
                 </a>
+             
+                <a href="./14.html">
+                  <img src="./14.png" alt="burn" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./16.html">
+                  <img src="./16.png" alt="garden" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./15.html">
+                  <img src="./15.png" alt="cup" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./17.html">
+                  <img src="./17.png" alt="wolves" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./18.html">
+                  <img src="./18.png" alt="balloon" style="width: 300px; height: 300px;">
+                </a>
+
+            </div>
+                
               
             <h2>Videos</h2>
             <div id="videos-container" class="videos-container"></div>
@@ -209,26 +240,6 @@ const jsonData = [
       "story": "A child was crying over a popped balloon. Her father gave her a new one but told her to let it go to watch it soar. Hesitant at first, she released it. As it floated away, her laughter replaced tears.She learned anger and sadness, like balloons, can be released."
     }
 ];
-
-// Function to display JSON data
-function displayData(data) {
-    const container = document.getElementById("dataContainer");
-    container.innerHTML = ""; // Clear container
-
-    data.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "data-item";
-        div.innerHTML = `
-            <strong>Title:</strong> ${item.title} <br>
-            <strong>Story:</strong> ${item.story} <br>
-        `;
-        container.appendChild(div);
-    });
-}
-
-// Call function to display data
-displayData(jsonData);
-
 
 
 

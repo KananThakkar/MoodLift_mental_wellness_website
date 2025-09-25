@@ -159,6 +159,12 @@ h2 {
     color: #333;
     text-align: center;
 }
+.anger{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 20px;
+
+}
 
   </style>
 </head>
@@ -168,7 +174,28 @@ h2 {
 
   <div class="notes-container" id="notesContainer"></div>
             <h2>Stories</h2>
-            <div id="fearstories"></div>
+            <div class="anger">
+                 <a href="./2.html">
+                  <img src="./2.png" alt="calm_river" style="width: 300px; height: 300px;">
+                </a>
+             
+                <a href="./5.html">
+                  <img src="./5.png" alt="burn" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./8.html">
+                  <img src="./8.png" alt="garden" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./9.html">
+                  <img src="./9.png" alt="cup" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./12.html">
+                  <img src="./12.png" alt="wolves" style="width: 300px; height: 300px;">
+                </a>
+                <a href="./7.html">
+                  <img src="./7.png" alt="balloon" style="width: 300px; height: 300px;">
+                </a>
+
+            </div>
             <h2>Videos</h2>
             <div id="videos-container" class="videos-container"></div>
             <h2>Images</h2>
@@ -179,56 +206,6 @@ h2 {
             <h2>Games</h2>
 
   <script>
-
-    const jsonData = [
-    {
-      "title": "The Calm River",
-      "story": "A man stood by a rushing river, fuming over a dispute. An old fisherman sat nearby, quietly casting his net. The man asked, 'Why aren’t you worried?'The fisherman smiled, 'The river flows, storms pass, and fish still swim. Life moves on — so should you.'The man left feeling lighter, realizing anger was like holding onto stones in a river — it only slowed him down."
-    },
-    {
-      "title": "The Forgotten Garden",
-      "story": "A young woman locked herself in anger after a fight with her friend. While walking aimlessly, she found an abandoned garden. She tended it gently for hours. By sunset, the garden bloomed, and so did her heart.She realized anger fades when you nurture something beautiful."
-    },
-    {
-      "title": "The Burning Candle",
-      "story": "A monk was meditating when a student burst in, furious over a betrayal. The monk calmly lit a candle and said, 'Watch this flame.'As the student watched, the monk blew it out. 'Anger is like this flame — it consumes you from within. Let it go, and you’ll find peace.'The student left, feeling the weight of anger lift."
-    },
-    {
-      "title": "The Two Wolves",
-      "story": "An old Cherokee told his grandson about a battle between two wolves inside us all. One wolf is anger, envy, and resentment. The other is peace, love, and kindness.The grandson asked, 'Which wolf wins?'The elder said, “The one you feed.”The boy thought and decided to feed peace. That night, he slept calmly."
-    },
-    {
-      "title": "A Cup of Tea",
-      "story": "A frustrated man stormed into a teahouse. The old shopkeeper served him tea without question. The man tried to complain but was calmed by the shopkeeper’s gentle smile.The man learned that sometimes peace doesn’t come from solving problems — but from sipping tea and letting go."
-    },
-    {
-      "title": "The Balloon of Letting Go",
-      "story": "A child was crying over a popped balloon. Her father gave her a new one but told her to let it go to watch it soar. Hesitant at first, she released it. As it floated away, her laughter replaced tears.She learned anger and sadness, like balloons, can be released."
-    }
-];
-
-// Function to display JSON data
-function displayData(data) {
-    const container = document.getElementById("fearstories");
-    container.innerHTML = ""; // Clear container
-
-    data.forEach(item => {
-        const div = document.createElement("div");
-        div.className = "data-item";
-        div.innerHTML = `
-            <strong>Title:</strong> ${item.title} <br>
-            <strong>Story:</strong> ${item.story} <br>
-        `;
-        container.appendChild(div);
-    });
-}
-
-// Call function to display data
-displayData(jsonData);
-
-
-
-
 
 
 

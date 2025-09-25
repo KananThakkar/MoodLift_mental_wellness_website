@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Story Page</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border: 2px solid black;
+     border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #5C735F;
+}
+
+.title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #FDF6EC;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #5C735F;
+}
+
+.poster-box {
+    width: 50%;
+    height: 400px;
+    border: 1px solid black;
+     border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    box-shadow: 20px 20px 50px grey;
+    margin: 50px 15px 10px 10px;
+}
+
+.poster-image {
+    max-width: 500px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+     border-radius: 30px;
+
+}
+
+.story-box {
+    width: 50%;
+    height: 400px;
+    border: 1px solid black;
+     border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 15px 10px 10px;
+    padding: 0px 20px;
+    background-color: #FDF6EC;
+    box-shadow: 20px 20px 50px grey;
+    color: #5C735F;
+}
+
+/* Optional: To make the text inside readable */
+.poster-box p,
+.story-box p {
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">The Two Wolves</h1>
+        <div class="content-wrapper">
+            <div class="poster-box">
+                <img src="17_1.png" alt="two wolves" style="max-width: 100%; max-height: 100%;" class="poster-image">
+            </div>
+            <div class="story-box">
+                <p>An elder told his grandson: “Inside us live two wolves — one is anger, the other peace.”The boy asked, “Which one wins?”The elder said, “The one you feed.” The boy thought and decided to feed peace. That night, he slept calmly.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

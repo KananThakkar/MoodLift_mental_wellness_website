@@ -8,6 +8,13 @@ body{
     height: 100vh;
     width: 100vw;
 }
+.anger{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 images per row */
+  gap: 20px;
+
+}
+
 body>nav{
     margin-left: 250px; /* default shifted to fit sidebar */
     padding: 20px;
