@@ -7,6 +7,61 @@ let p_block=document.getElementById('profile-block')
 
 let l_btn=document.getElementById('lbtn')
 
+//-----------------------------------
+
+
+
+async function loadStories(mood) {
+  // Map moods to meaningful keywords for Gutendex search
+  const mapping = {
+    angry: "forgiveness compassion peace",
+    anxiety: "courage calm mindfulness",
+    bored: "adventure discovery creativity",
+    confused: "wisdom clarity journey",
+    disappointed: "hope resilience recovery",
+    affected: "healing comfort kindness",
+    fear: "bravery courage overcoming",
+    guilt: "redemption self-acceptance forgiveness",
+    annoyed: "patience perspective peace",
+    envy: "gratitude contentment joy",
+    upset: "soothing comfort inspiration"
+  };
+
+  const keyword = mapping[mood] || "inspiration";
+
+  // Call Gutendex API with keyword
+  const res = await fetch(`https://gutendex.com/books?search=${encodeURIComponent(keyword)}`);
+  const data = await res.json();
+
+  // Show up to 10 results
+  const container = document.getElementById("stories");
+  container.innerHTML = "";
+
+  if (!data.results.length) {
+    container.innerHTML = `<p>No stories found for mood: ${mood}</p>`;
+    return;
+  }
+
+  data.results.slice(0,10).forEach(book => {
+    const div = document.createElement("div");
+    div.className = "story-card";
+    div.innerHTML = `
+      <h3>${book.title}</h3>
+      <p><b>Author:</b> ${book.authors?.[0]?.name || "Unknown"}</p>
+      <p><b>Theme:</b> ${book.subjects?.[0] || keyword}</p>
+      <a href="${book.formats["text/plain; charset=utf-8"] 
+               || book.formats["text/html"] 
+               || book.formats["application/pdf"]}" 
+         target="_blank">📖 Read Full Story</a>
+      <hr>
+    `;
+    container.appendChild(div);
+  });
+}
+
+// Example: load 10 stories for "anxiety"
+loadStories("anxiety");
+
 
 
 
