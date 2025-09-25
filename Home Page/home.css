@@ -14,6 +14,11 @@ body{
   gap: 20px;
 
 }
+.story{
+     border-radius: 0px;
+    opacity: 1;
+    margin: 0px;
+}
 
 body>nav{
     margin-left: 250px; /* default shifted to fit sidebar */
