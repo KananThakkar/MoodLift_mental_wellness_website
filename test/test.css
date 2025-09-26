@@ -1,3 +1,6 @@
+*{
+      font-family: cursive;
+    }
 /* Images container */
 #images-container {
     display: flex;

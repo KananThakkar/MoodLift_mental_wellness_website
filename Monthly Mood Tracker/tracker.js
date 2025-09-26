@@ -277,10 +277,10 @@ function flashMessage(text){
     el = document.createElement('div');
     el.id = 'toastMsg';
     el.style.position = 'fixed';
-    el.style.right = '28px';
+    el.style.left = '28px';
     el.style.bottom = '28px';
-    el.style.background = 'rgba(66, 42, 66, 0.96)';
-    el.style.color = 'white';
+    el.style.background = '#5C735F';
+    el.style.color = '#FDF6EC';
     el.style.padding = '10px 14px';
     el.style.borderRadius = '10px';
     el.style.boxShadow = '0 8px 30px rgba(0,0,0,0.12)';

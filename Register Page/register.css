@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 *{
     margin: 0;
     padding: 0;
@@ -8,8 +7,8 @@
 body{
     width: 100vw;
     height: 100vh;
-    background-color: #FDF6EC;
-    background-size: cover;
+    background-image: url(./image1.png);
+    background-size: contain;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -17,7 +16,7 @@ body{
 body>section{
     width: 60%;
     height: 70%;
-    border: 1px solid #5C735F;
+    border: 2px solid #5C735F;
     display: flex;
     border-radius: 10px;
 }
@@ -38,7 +37,7 @@ aside>h1{
 body>section>form{
     width: 65%;
     height: 100%;
-    backdrop-filter: blur(15px);
+    background-color: white;
     border-radius: 0px 10px 10px 0px;
     display: flex;
     flex-direction: column;
@@ -55,6 +54,7 @@ form>input{
     border: none;
     border-radius: 5px;
     padding-left: 20px;
+    background-color: #FDF6EC;
 }
 form>input::placeholder{
     font-size: 16px;

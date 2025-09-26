@@ -1,12 +1,11 @@
 :root{
-    --bg:#fbf8fd;
+    --bg:#FDF6EC;
     --card:#fff;
-    --accent:#6f3a82;
-    --muted:#e9e5eb;
-    --text:#442a44;
-    --success:#16a34a;
+    --accent:#5C735F;
+    --muted:#FDF6EC;
+    --text:#5C735F;
   }
-  html,body{height:100%;margin:0;background:var(--bg);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial;color:var(--text);}
+  html,body{height:100%;margin:0;background:var(--bg);font-family: cursive;color:var(--text);}
   .page {
     display:flex;
     gap:28px;
@@ -38,7 +37,7 @@
     pointer-events:none;
   }
   .center-text h2{margin:0;font-size:22px;color:var(--accent)}
-  .center-text p{margin:8px 0 0 0;color:#7b627b;font-size:13px}
+  .center-text p{margin:8px 0 0 0;color:#5C735F;font-size:13px}
 
   /* SVG segments */
   svg{display:block; width:520px; height:520px}
@@ -49,7 +48,7 @@
   .segment.future { opacity:0.45; cursor:not-allowed; filter:grayscale(0.02); }
   .segment.highlight { stroke:#f59e0b; stroke-width:3; filter: drop-shadow(0 8px 18px rgba(111,58,130,0.08)); }
 
-  .day-label { font-size:12px; fill:#6a4f6a; font-weight:600; text-anchor:middle; dominant-baseline:central }
+  .day-label { font-size:12px; fill:#5C735F; font-weight:600; text-anchor:middle; dominant-baseline:central }
 
   /* RIGHT: controls */
   .panel {
@@ -59,7 +58,7 @@
     gap:12px;
   }
   .title { font-size:20px; font-weight:700; color:var(--accent); margin:6px 0 0 0; }
-  .subtitle { color:#7b627b; font-size:13px; margin:4px 0 12px 0; }
+  .subtitle { color:#5C735F; font-size:13px; margin:4px 0 12px 0; }
 
   .mood-list {
     background:linear-gradient(180deg, rgba(255,255,255,0.98), rgba(255,255,255,0.99));
@@ -70,7 +69,7 @@
     display:flex;
     flex-direction:column;
     gap:8px;
-    max-height:420px;
+    max-height:250px;
     overflow:auto;
   }
   .mood-btn {
@@ -83,11 +82,11 @@
     background:white;
     cursor:pointer;
     font-weight:600;
-    color:#422a43;
+    color:#5C735F;
   }
   .mood-btn .sw { width:22px; height:22px; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.06) }
-  .mood-btn.selected { box-shadow:0 6px 20px rgba(111,58,130,0.08); border:1px solid rgba(111,58,130,0.08) }
-
+  .mood-btn.selected { box-shadow:0 6px 20px rgba(111,58,130,0.08); border:1px solid #5C735F}
+  
   .legend {
     display:flex;
     flex-direction:column;
@@ -95,13 +94,13 @@
     margin-top:8px;
     padding:10px;
     border-radius:8px;
-    border:1px dashed #efe7f6;
+    border:1px solid #efe7f6;
     font-size:13px;
-    color:#6a4f6a;
+    color:#5C735F;
     background:#fff;
   }
   .legend-row{display:flex;gap:10px;align-items:center}
-  .legend-sq{width:14px;height:14px;border-radius:3px;display:inline-block;margin-right:8px}
+ 
 
   .actions { display:flex; flex-direction:column; gap:10px; margin-top:6px }
   .btn {
@@ -115,7 +114,7 @@
   }
   .btn.ghost { background:white; color:var(--accent); border:1px solid #f0e6f6; }
 
-  .hint { font-size:13px; color:#7b627b; margin-top:6px }
+  .hint { font-size:13px; color:#5C735F; margin-top:6px }
 
   /* responsive */
   @media (max-width:1000px){

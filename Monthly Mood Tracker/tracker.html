@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Monthly Mood Tracker — 4 rings</title>
 <link rel="stylesheet" href="./tracker.css">
+<link rel="shortcut icon" href="../favicon-32x321.png" type="image/x-icon">
 </head>
 <body>
   <div class="page">
@@ -29,16 +30,18 @@
 
       <div class="legend" aria-hidden="false">
         <div style="font-weight:700">Time-of-day rings (inner → outer):</div>
-        <div class="legend-row"><span class="legend-sq" style="background:#FFF1C6"></span> Morning (hours 0–5)</div>
-        <div class="legend-row"><span class="legend-sq" style="background:#E8F7E9"></span> Afternoon (hours 6–11)</div>
-        <div class="legend-row"><span class="legend-sq" style="background:#E6F0FF"></span> Evening (hours 12–17)</div>
-        <div class="legend-row"><span class="legend-sq" style="background:#F6E8FF"></span> Night (hours 18–23)</div>
+        <ul>
+        <li><div class="legend-row"> Morning (hours 0–5)</div></li>
+        <li><div class="legend-row"> Afternoon (hours 6–11)</div></li>
+        <li><div class="legend-row"> Evening (hours 12–17)</div></li>
+        <li><div class="legend-row"> Night (hours 18–23)</div></li>
+        </ul>
       </div>
 
       <div class="actions">
         <button class="btn" id="saveBtn">Save Tracker as Image</button>
         <button class="btn ghost" id="viewBtn">View Saved Trackers</button>
-        <div class="hint">Tip: clear a filled slot with <strong>Alt/Ctrl + click</strong>.</div>
+        <div class="hint">Tip: Clear a filled slot with <strong>Alt/Ctrl + click</strong>.</div>
       </div>
     </div>
   </div>

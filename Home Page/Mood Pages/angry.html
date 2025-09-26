@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Affirmations - Angry</title>
 
-  <!-- Playful Handwriting Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+ 
+  <link rel="shortcut icon" href="../favicon-32x321.png" type="image/x-icon">
 
   <style>
    
    
 
 body {
-  font-family: 'Patrick Hand', cursive;
+  font-family: cursive;
   background: #FDF6EC;
   text-align: center;
   margin: 0;
@@ -362,9 +362,7 @@ async function fetchPexelsImages() {
 
         const data = await res.json();
         const container = document.getElementById('images-container');
-        console.log("Container:", container);  // Should NOT be null
-        console.log("API Response:", data);   
-        // Clear previous images
+        
 
         data.photos.forEach(photo => {
             const card = document.createElement('div');
@@ -372,7 +370,7 @@ async function fetchPexelsImages() {
 
             card.innerHTML = `
                 <img src="${photo.src.medium}" alt="${photo.alt}">
-                <p>${photo.photographer}</p>
+                
             `;
 
             container.appendChild(card);
@@ -406,12 +404,15 @@ async function fetchPexelsVideos() {
     container.innerHTML = "";
 
     data.videos.forEach(video => {
-      // Pick a small/medium quality file for faster loading
-      const videoFile = video.video_files.find(
-        file => file.quality === "sd" && file.width <= 640
+      // Filter horizontal videos only
+      const horizontalFiles = video.video_files.filter(
+        file => file.width > file.height && file.quality === "sd"
       );
 
-      if (videoFile) {
+      // Pick the first horizontal video available
+      if (horizontalFiles.length > 0) {
+        const videoFile = horizontalFiles[0];
+
         const card = document.createElement("div");
         card.classList.add("video-card");
 
@@ -420,7 +421,7 @@ async function fetchPexelsVideos() {
             <source src="${videoFile.link}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <p>Video by ${video.user.name}</p>
+          
         `;
 
         container.appendChild(card);
@@ -436,14 +437,17 @@ window.addEventListener("DOMContentLoaded", fetchPexelsVideos);
 
 
 const FREESOUND_API_KEY = "nHcgFkyw5bOUq9Wqd2NY6u5aFFrAS2LZqlPLM3p6"; // Replace with your key
-const audioQuery = "intense drums, storm, heavy rain, thunder";
+const audioQuery = "rain birds forest relaxing nature";
+
+
 
 let currentlyPlayingAudio = null; // Track the currently playing audio
 
 async function fetchNatureSounds() {
   try {
     const res = await fetch(
-      `https://freesound.org/apiv2/search/text/?query=${encodeURIComponent(audioQuery)}&fields=id,name,previews,duration&filter=duration:[0 TO 600]&page_size=8&token=${FREESOUND_API_KEY}`
+      `https://freesound.org/apiv2/search/text/?query=${encodeURIComponent(audioQuery)}&fields=id,name,previews,duration,description&filter=duration:[0 TO 900]&page_size=8&token=${FREESOUND_API_KEY}`
+
     );
     const data = await res.json();
     console.log("Freesound data:", data);

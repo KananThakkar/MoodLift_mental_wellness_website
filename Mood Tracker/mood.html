@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Year in Pixels — Mood Tracker</title>
   <link rel="stylesheet" href="./mood.css">
+  <link rel="shortcut icon" href="../favicon-32x321.png" type="image/x-icon">
 </head>
 <body>
   <div class="wrap">
@@ -30,8 +31,12 @@
       </div>
 
       <aside class="legend" aria-label="Mood legend">
-        <h3>Legend</h3>
-        <div id="legendItems"></div>
+        <div>
+        <div class="title">Monthly Mood Tracker</div>
+      </div>
+        <div class="mood-list" id="moodList" role="list">
+        <!-- moods populated by JS -->
+        </div>
         <div class="actions">
           <button id="prevYear" class="small">◀ Prev</button>
           <button id="nextYear" class="small">Next ▶</button>

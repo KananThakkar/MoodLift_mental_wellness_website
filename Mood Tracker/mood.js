@@ -43,16 +43,42 @@
       yearSelect.addEventListener('change',()=>{currentYear = parseInt(yearSelect.value);render();});
     }
 
-    function buildLegend(){
-      legendEl.innerHTML = '';
-      MOODS.slice(1).forEach(m=>{
-        const r = document.createElement('div');r.className='moodItem';
-        const s = document.createElement('div');s.className='swatch';s.style.background = m.color;
-        if(m.border) s.style.border = '1px solid '+m.border;
-        const t = document.createElement('div');t.textContent = m.label; t.style.fontSize='13px';
-        r.appendChild(s);r.appendChild(t);legendEl.appendChild(r);
-      });
-    }
+    function buildMoods(){
+    moodList.innerHTML = '';
+    MOODS.forEach(m=>{
+    const btn = document.createElement('button');
+    btn.className = 'mood-btn';
+    btn.dataset.color = m.color;
+    btn.title = m.label;
+    const sw = document.createElement('span');
+    sw.className = 'sw';
+    sw.style.background = m.color;
+    btn.appendChild(sw);
+    const txt = document.createElement('span');
+    txt.textContent = m.label;
+    btn.appendChild(txt);
+
+    btn.addEventListener('click', () => {
+      selectMood(m.color, btn);
+      // store to localStorage for cross-tab
+      localStorage.setItem(STORAGE_KEYS.LAST_MOOD, m.color);
+      localStorage.setItem(STORAGE_KEYS.LAST_MOOD_TS, Date.now().toString());
+      // auto-fill current slot too
+      autoFillCurrentSlot();
+    });
+
+    // highlight if currently selected
+    if (m.color === selectedColor) btn.classList.add('selected');
+
+    moodList.appendChild(btn);
+  });
+}
+
+function selectMood(color, clickedEl){
+  selectedColor = color;
+  moodList.querySelectorAll('.mood-btn').forEach(x => x.classList.remove('selected'));
+  if (clickedEl) clickedEl.classList.add('selected');
+}
 
     function daysInMonth(y,m){return new Date(y,m+1,0).getDate();}
 
@@ -108,11 +134,7 @@
     function applyMoodToCell(cell, moodKey){
       const mood = MOODS.find(m=>m.key===moodKey) || MOODS[0];
       cell.style.background = mood.color || '#fff';
-      if(moodKey === 'annoyed') cell.style.border = '1px solid #666'; else cell.style.border='1px solid #e3e6ea';
-      // For better contrast when using black swatch for 'sick'
-      if(mood.color === '#000000'){
-        cell.style.boxShadow = 'inset 0 0 0 1px rgba(255,255,255,0.06)';
-      } else cell.style.boxShadow='none';
+      cell.style.border='1px solid #e3e6ea';
     }
 
     // Controls
@@ -142,4 +164,4 @@
     });
 
     // init
-    initYearSelect(); buildLegend(); render();
+    initYearSelect(); buildMoods(); render();

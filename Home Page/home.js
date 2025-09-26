@@ -89,11 +89,12 @@ function toggleSidebar() {
 
 const API_KEY = 'VrzngQzv2f12Yx0A4gexwxTBZLVcwynONmclhZGXuyW8fmZolJViHdH1';  // Replace with your Pexels API Key
 const query = 'mental wellness, calm, relaxation, mindfulness, nature, positive vibes, healing, peaceful, meditation, stress relief, self-care, happy life, soothing music, positive quotes, breathing exercises, yoga'; // Soothing keywords
-const perPage = 12; // Number of images to fetch
+const imagesperPage = 8;
+const videosperPage = 13; // Number of images to fetch
 
 async function fetchPexelsImages() {
     try {
-        const res = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${perPage}`, {
+        const res = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=${imagesperPage}`, {
             headers: {
                 Authorization: API_KEY
             }
@@ -101,8 +102,7 @@ async function fetchPexelsImages() {
 
         const data = await res.json();
         const container = document.getElementById('images-container');
-        console.log("Container:", container);  // Should NOT be null
-        console.log("API Response:", data);   
+         
         // Clear previous images
 
         data.photos.forEach(photo => {
@@ -111,7 +111,7 @@ async function fetchPexelsImages() {
 
             card.innerHTML = `
                 <img src="${photo.src.medium}" alt="${photo.alt}">
-                <p>${photo.photographer}</p>
+                
             `;
 
             container.appendChild(card);
@@ -128,7 +128,7 @@ window.addEventListener('DOMContentLoaded', fetchPexelsImages);
 async function fetchPexelsVideos() {
   try {
     const res = await fetch(
-      `https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&per_page=${perPage}`,
+      `https://api.pexels.com/videos/search?query=${encodeURIComponent(query)}&per_page=${videosperPage}`,
       {
         headers: { Authorization: API_KEY }
       }
@@ -145,12 +145,15 @@ async function fetchPexelsVideos() {
     container.innerHTML = "";
 
     data.videos.forEach(video => {
-      // Pick a small/medium quality file for faster loading
-      const videoFile = video.video_files.find(
-        file => file.quality === "sd" && file.width <= 640
+      // Filter horizontal videos only
+      const horizontalFiles = video.video_files.filter(
+        file => file.width > file.height && file.quality === "sd"
       );
 
-      if (videoFile) {
+      // Pick the first horizontal video available
+      if (horizontalFiles.length > 0) {
+        const videoFile = horizontalFiles[0];
+
         const card = document.createElement("div");
         card.classList.add("video-card");
 
@@ -159,7 +162,7 @@ async function fetchPexelsVideos() {
             <source src="${videoFile.link}" type="video/mp4">
             Your browser does not support the video tag.
           </video>
-          <p>Video by ${video.user.name}</p>
+          
         `;
 
         container.appendChild(card);
@@ -171,6 +174,7 @@ async function fetchPexelsVideos() {
 }
 
 window.addEventListener("DOMContentLoaded", fetchPexelsVideos);
+
 
 async function fetchYogaPoses() {
   try {
@@ -203,7 +207,7 @@ window.addEventListener("DOMContentLoaded", fetchYogaPoses);
 
 
 const FREESOUND_API_KEY = "nHcgFkyw5bOUq9Wqd2NY6u5aFFrAS2LZqlPLM3p6"; // Replace with your key
-const audioQuery = "rain, forest, ocean, birds, relaxing, meditation, nature, wind";
+const audioQuery = "rain birds forest relaxing nature";
 
 let currentlyPlayingAudio = null; // Track the currently playing audio
 
