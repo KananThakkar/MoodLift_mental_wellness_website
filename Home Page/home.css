@@ -315,6 +315,85 @@ button:hover{
     color: #333;
     text-align: center;
 }
+#yoga-section {
+  padding: 40px;
+  background: #f0f9f6;
+  text-align: center;
+}
+
+.yoga-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.yoga-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.yoga-card:hover {
+  transform: scale(1.03);
+}
+
+.yoga-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.yoga-card h3 {
+  margin: 10px 0;
+  color: #2c3e50;
+}
+
+.yoga-card p {
+  font-size: 14px;
+  color: #555;
+  text-align: left;
+}
+#sound-section {
+  padding: 40px;
+  background: #f5faff;
+  text-align: center;
+}
+
+.sound-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.sound-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.sound-card:hover {
+  transform: translateY(-5px);
+}
+
+.sound-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sound-card h3 {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #2c3e50;
+}
+
 
 footer{
     height: 25vh;

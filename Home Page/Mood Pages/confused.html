@@ -165,7 +165,84 @@ h2 {
   gap: 20px;
 
 }
+#sound-section {
+  padding: 40px;
+  background: #f5faff;
+  text-align: center;
+}
 
+.sound-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.sound-card {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.sound-card:hover {
+  transform: translateY(-5px);
+}
+
+.sound-card audio {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.sound-card h3 {
+  font-size: 1.1rem;
+  margin-top: 10px;
+  color: #2c3e50;
+}
+#yoga-section {
+  padding: 40px;
+  background: #f0f9f6;
+  text-align: center;
+}
+
+.yoga-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.yoga-card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.yoga-card:hover {
+  transform: scale(1.03);
+}
+
+.yoga-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.yoga-card h3 {
+  margin: 10px 0;
+  color: #2c3e50;
+}
+
+.yoga-card p {
+  font-size: 14px;
+  color: #555;
+  text-align: left;
+}
   </style>
 </head>
 <body>
@@ -201,9 +278,16 @@ h2 {
             <h2>Images</h2>
             <div id="images-container" class="images-container"></div>
             <h2>Songs</h2>
-            <h2>Mind Exercises</h2>
-            <h2>Yoga</h2>
-            <h2>Games</h2>
+            <section id="sound-section">
+              <h2>Nature & Relaxation Sounds</h2>
+              <div id="sound-container" class="sound-grid"></div>
+            </section>
+            <h2>Exercises</h2>
+            <section id="yoga-section">
+              <h2>Yoga for Mind & Body</h2>
+              <div id="yoga-container" class="yoga-grid"></div>
+            </section>
+
 
   <script>
 
@@ -309,6 +393,87 @@ async function fetchPexelsVideos() {
 }
 
 window.addEventListener("DOMContentLoaded", fetchPexelsVideos);
+
+
+
+const FREESOUND_API_KEY = "nHcgFkyw5bOUq9Wqd2NY6u5aFFrAS2LZqlPLM3p6"; // Replace with your key
+const audioQuery = "rainfall, gentle river, meditation chimes, forest ambience";
+
+let currentlyPlayingAudio = null; // Track the currently playing audio
+
+async function fetchNatureSounds() {
+  try {
+    const res = await fetch(
+      `https://freesound.org/apiv2/search/text/?query=${encodeURIComponent(audioQuery)}&fields=id,name,previews,duration&filter=duration:[0 TO 600]&page_size=8&token=${FREESOUND_API_KEY}`
+    );
+    const data = await res.json();
+    console.log("Freesound data:", data);
+
+    const container = document.getElementById("sound-container");
+    container.innerHTML = "";
+
+    if (!data.results || data.results.length === 0) {
+      container.innerHTML = "<p>No sounds found.</p>";
+      return;
+    }
+
+    data.results.forEach(sound => {
+      const card = document.createElement("div");
+      card.classList.add("sound-card");
+      card.innerHTML = `
+        <h3>${sound.name}</h3>
+        <audio controls>
+          <source src="${sound.previews['preview-hq-mp3']}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      `;
+      container.appendChild(card);
+
+      // Add event listener to control multiple audios
+      const audioElement = card.querySelector("audio");
+      audioElement.addEventListener("play", () => {
+        if (currentlyPlayingAudio && currentlyPlayingAudio !== audioElement) {
+          currentlyPlayingAudio.pause();
+        }
+        currentlyPlayingAudio = audioElement;
+      });
+    });
+  } catch (err) {
+    console.error("Freesound API Error:", err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", fetchNatureSounds);
+
+
+
+async function fetchYogaPoses() {
+  try {
+    const res = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+    const data = await res.json();
+
+    const container = document.getElementById('yoga-container');
+    container.innerHTML = "";
+    
+    // Show first 6 poses only
+    data.slice(48, 56).forEach(pose => {
+      const card = document.createElement('div');
+      card.classList.add('yoga-card');
+
+      card.innerHTML = `
+        <img src="${pose.url_png}" alt="${pose.english_name}">
+        <h3>${pose.english_name}</h3>
+        <p><strong>Sanskrit:</strong> ${pose.sanskrit_name}</p>
+        <p><strong>Steps:</strong> ${pose.pose_benefits || "Follow standard breathing and posture."}</p>
+      `;
+
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Yoga API Error:", err);
+  }
+}
+window.addEventListener("DOMContentLoaded", fetchYogaPoses);
   </script>
 
 </body>

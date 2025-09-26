@@ -171,3 +171,82 @@ async function fetchPexelsVideos() {
 }
 
 window.addEventListener("DOMContentLoaded", fetchPexelsVideos);
+
+async function fetchYogaPoses() {
+  try {
+    const res = await fetch('https://yoga-api-nzy4.onrender.com/v1/poses');
+    const data = await res.json();
+
+    const container = document.getElementById('yoga-container');
+    container.innerHTML = "";
+    
+    // Show first 6 poses only
+    data.slice(0, 8).forEach(pose => {
+      const card = document.createElement('div');
+      card.classList.add('yoga-card');
+
+      card.innerHTML = `
+        <img src="${pose.url_png}" alt="${pose.english_name}">
+        <h3>${pose.english_name}</h3>
+        <p><strong>Sanskrit:</strong> ${pose.sanskrit_name}</p>
+        <p><strong>Steps:</strong> ${pose.pose_benefits || "Follow standard breathing and posture."}</p>
+      `;
+
+      container.appendChild(card);
+    });
+  } catch (err) {
+    console.error("Yoga API Error:", err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", fetchYogaPoses);
+
+
+const FREESOUND_API_KEY = "nHcgFkyw5bOUq9Wqd2NY6u5aFFrAS2LZqlPLM3p6"; // Replace with your key
+const audioQuery = "rain, forest, ocean, birds, relaxing, meditation, nature, wind";
+
+let currentlyPlayingAudio = null; // Track the currently playing audio
+
+async function fetchNatureSounds() {
+  try {
+    const res = await fetch(
+      `https://freesound.org/apiv2/search/text/?query=${encodeURIComponent(audioQuery)}&fields=id,name,previews,duration&filter=duration:[0 TO 600]&page_size=8&token=${FREESOUND_API_KEY}`
+    );
+    const data = await res.json();
+    console.log("Freesound data:", data);
+
+    const container = document.getElementById("sound-container");
+    container.innerHTML = "";
+
+    if (!data.results || data.results.length === 0) {
+      container.innerHTML = "<p>No sounds found.</p>";
+      return;
+    }
+
+    data.results.forEach(sound => {
+      const card = document.createElement("div");
+      card.classList.add("sound-card");
+      card.innerHTML = `
+        <h3>${sound.name}</h3>
+        <audio controls>
+          <source src="${sound.previews['preview-hq-mp3']}" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      `;
+      container.appendChild(card);
+
+      // Add event listener to control multiple audios
+      const audioElement = card.querySelector("audio");
+      audioElement.addEventListener("play", () => {
+        if (currentlyPlayingAudio && currentlyPlayingAudio !== audioElement) {
+          currentlyPlayingAudio.pause();
+        }
+        currentlyPlayingAudio = audioElement;
+      });
+    });
+  } catch (err) {
+    console.error("Freesound API Error:", err);
+  }
+}
+
+window.addEventListener("DOMContentLoaded", fetchNatureSounds);
