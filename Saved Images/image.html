@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Mood Tracker</title>
+   <style>
+    /* profile.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+    background-color: #f4f7f6;
+}
+
+.profile-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Max width for a clean look */
+    position: relative; /* For absolute positioning of logout */
+}
+
+/* Positioning based on the sketch */
+.logout-button {
+    padding: 10px 20px;
+    background-color: #45a049 ;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    /* Absolute position relative to .profile-page-container, matching sketch placement */
+    margin: 50px;
+    top: 0;
+    left: 0;
+}
+
+.logout-button:hover {
+    background-color: #da190b;
+}
+
+
+/* Main Content Styling */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center initial and greeting */
+    gap: 15px;
+    margin-top: 50px; /* Space from top (and logout button) */
+    width: 100%;
+}
+
+.user-initial {
+    /* Styles for the circle with the initial */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 36px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#greetingText {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #333;
+    font-style: italic;
+    text-align: center;
+}
+
+.greeting-box {
+    /* Main box that contains all the feature buttons */
+    border: 2px solid #ccc;
+    padding: 20px;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    align-items: center;
+}
+
+.buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.profile-button {
+    padding: 15px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Make buttons full width inside the container */
+    width: 100%; 
+}
+
+.profile-button:hover:not(:disabled) {
+    background-color: #45a049;
+}
+
+.disabled-button {
+    background-color: #cccccc !important;
+    cursor: not-allowed !important;
+}
+   </style>
+    <link rel="stylesheet" href="profile.css"> </head>
+<body>
+    <div class="profile-page-container">
+        
+        
+
+        <div class="header-section">
+            <div class="user-initial" id="userInitial"></div>
+            <div class="greeting-box">
+                <div id="uname" style="color: #4CAF50;align-items: center;"></div>
+                
+                <div class="buttons-container">
+                    <p style="color: #45a049; font-size: 30px;">Saved Images</p>
+                    <button class="profile-button" onclick="location.href='../Mood Tracker/gallery.html'">Yearly Mood Tracker</button>
+                    <button class="profile-button" onclick="location.href='../Monthly Mood Tracker/tracker.html'">Monthly Mood Tracker</button>
+                    <button class="profile-button" onclick="location.href='../Notes Page/notes.html'">Notes</button>
+                </div>
+            </div>
+        </div>
+        <button class="logout-button" onclick="location.href='../Login Page/login.html'" id="logoutBtn">Logout</button>
+        
+    </div>
+
+    <script>
+        let username=document.getElementById('uname');
+        let unameblk=document.getElementById('uname');
+        let logoutBtn = document.getElementById('logoutBtn');
+        let abc=document.getElementById('userInitial')
+        username.innerHTML=`<p>hello ${username}!, I Hope you feel good</p>`
+        const firstLetter_charAt = username.charAt(0);
+        abc.innerHTML=`<p>${firstLetter_charAt}</p>`
+    
+    
+
+
+        // --- 3. Logout Functionality ---
+        logoutBtn.addEventListener('click', () => {
+        // Clear the username to simulate being logged out.
+        localStorage.removeItem('userName'); 
+        
+        alert(`Goodbye, ${capitalizedName}! You have been logged out.`);
+        
+        // Redirect back to the profile page (which will now show the default/login state)
+        window.location.href = '../Login Page/login.html'; 
+    });
+
+    </script>
+</body>
+</html>

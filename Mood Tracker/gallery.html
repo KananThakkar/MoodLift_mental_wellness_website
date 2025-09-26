@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Mood Trackers Gallery</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        /* Specific CSS for the gallery page */
+        .gallery-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .saved-image-card {
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 10px;
+            background-color: #fff;
+            text-align: center;
+            position: relative;
+        }
+
+        .saved-image-card img {
+            max-width: 300px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Saved Mood Trackers Gallery</h1>
+    <p><a href="../Saved Images/image.html">← Back to Mood Tracker</a></p>
+
+    <div id="galleryContainer" class="gallery-container">
+        </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
