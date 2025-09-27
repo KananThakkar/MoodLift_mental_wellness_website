@@ -296,11 +296,25 @@ function flashMessage(text){
 
 /* ====== Save SVG -> PNG and persist image ====== */
 function saveSvgAsPngAndStore(){
-  // clone the SVG node and inline fills (we already set fill on paths)
+  // force inline all styles
+  svg.querySelectorAll('*').forEach(el => {
+    const style = window.getComputedStyle(el);
+    if (style.fill) el.setAttribute('fill', style.fill);
+    if (style.stroke) el.setAttribute('stroke', style.stroke);
+    if (style['stroke-width']) el.setAttribute('stroke-width', style['stroke-width']);
+  });
+
   const clone = svg.cloneNode(true);
-  // ensure width/height are present
-  clone.setAttribute('width', width);
-  clone.setAttribute('height', height);
+
+  
+
+// before serializing
+clone.setAttribute("width", width);
+clone.setAttribute("height", height);
+clone.setAttribute("viewBox", `0 0 ${width} ${height}`);
+clone.setAttribute("preserveAspectRatio", "xMidYMid meet");
+
+
   // serialize
   const svgString = new XMLSerializer().serializeToString(clone);
   const svg64 = btoa(unescape(encodeURIComponent(svgString)));
@@ -309,30 +323,35 @@ function saveSvgAsPngAndStore(){
   const img = new Image();
   img.onload = function(){
     const canvas = document.createElement('canvas');
-    // use 2x for crispness
-    canvas.width = width*2;
-    canvas.height = height*2;
+    canvas.width = width * 2; 
+    canvas.height = height * 2;
     const ctx = canvas.getContext('2d');
-    // white background
+
     ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
     const png = canvas.toDataURL('image/png');
 
     try {
       const arr = JSON.parse(localStorage.getItem(STORAGE_KEYS.SAVED) || '[]');
-      arr.push({date: new Date().toISOString(), img});
+      arr.push({
+        date: new Date().toISOString(),
+        data: png
+      });
       localStorage.setItem(STORAGE_KEYS.SAVED, JSON.stringify(arr));
       flashMessage('Tracker image saved');
-    }catch(e){
+    } catch (e) {
       console.error(e);
       flashMessage('Failed to save image');
     }
   };
+
   img.onerror = function(e){
     console.error('Image load error', e);
     flashMessage('Could not render image. See console.');
   };
+
   img.src = img64;
 }
 

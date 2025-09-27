@@ -319,7 +319,7 @@ button:hover{
     color: #333;
     text-align: center;
 }
-#yoga-section {
+#yoga-section, #videos-section, #images-section {
   padding: 40px;
   background: #f0f9f6;
   text-align: center;
@@ -431,13 +431,18 @@ footer>ul:nth-child(3){
     font-size: 20px;
 }
 /* Sidebar */
+
+
+
     #menu {
       height: 100%;
       width: 250px;  /* default visible */
       position: fixed;
       top: 0;
       left: 0;
+      bottom: 0;
       background-color: #5C735F;
+      z-index: 1000;
       overflow-x: hidden;
       transition: 0.3s;
       padding-top: 60px;
@@ -461,6 +466,7 @@ footer>ul:nth-child(3){
     .main-container {
       margin-left: 250px; /* default shifted to fit sidebar */
       padding: 20px;
+      overflow-x: auto;
       transition: margin-left 0.3s;
     }
 
