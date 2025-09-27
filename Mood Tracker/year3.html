@@ -16,18 +16,26 @@
 }
 
 h1, h2 {
-    color: #333;
+    color: #5C735F;
     margin-bottom: 30px;
 }
 
 .tracker-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     border: 1px solid #ccc;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
     margin-bottom: 30px;
+}
+.aside{
+    height: 600px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    margin: 50px 30px;
+    
 }
 
 .grid-header {
@@ -40,7 +48,7 @@ h1, h2 {
     width: 22px; /* Increased slightly to match pixel size */
     text-align: center;
     font-weight: bold;
-    color: #555;
+    color: #5C735F;
     box-sizing: border-box;
 }
 
@@ -90,8 +98,8 @@ h1, h2 {
 /* Style for today's date */
 .today {
     /* Highlight with a prominent border */
-    border: 2px solid #007bff; 
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    border: 2px solid #5C735F; 
+    box-shadow: 0 0 5px #5C735F;
 }
 
 .legend {
@@ -99,6 +107,12 @@ h1, h2 {
     flex-wrap: wrap;
     margin-top: 20px;
     padding-left: 30px;
+    flex-direction: column;
+}
+.mood{
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
 }
 
 .mood-option {
@@ -115,16 +129,18 @@ h1, h2 {
     box-shadow: 0 0 5px rgba(0,0,0,0.3);
 }
 
+
 .legend span {
     margin-right: 15px;
     line-height: 15px;
     font-size: 0.9em;
-    color: #666;
+    color: #5C735F;
 }
+
 
 #saveImageBtn {
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #5C735F;
     color: white;
     border: none;
     border-radius: 5px;
@@ -134,7 +150,7 @@ h1, h2 {
 }
 
 #saveImageBtn:hover {
-    background-color: #0056b3;
+    background-color: #5C735F;
 }
 
 #savedImagesContainer {
@@ -158,37 +174,71 @@ h1, h2 {
 <body>
     <h1>YEAR IN PIXELS</h1>
     <div class="tracker-container">
-        <div class="grid-header">
-            <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span>
-        </div>
-        <div class="grid-body">
-            <div class="day-numbers"></div> 
-            <div class="mood-grid" id="moodGrid">
+        <div class="grid">
+            <div class="grid-header">
+                <span>J</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span>
+            </div>
+             <div class="grid-body">
+             <div class="day-numbers"></div> 
+                <div class="mood-grid" id="moodGrid">
                 </div>
+            </div>
+            </div>
+        <div class="aside">
+            <div class="legend">
+                <div class="mood">
+                    <div class="mood-option" data-mood="amazing" style="background-color: #ffb3b3;"></div><span>Amazing</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="excited" style="background-color: #e6e6ff;"></div><span>Excited</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="motivated" style="background-color: #b3ffb3;"></div><span>Motivated</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="productive" style="background-color: #ffffb3;"></div><span>Productive</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="frustrated" style="background-color: #ffcc66;"></div><span>Frustrated</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="overwhelmed" style="background-color: #ff9933;"></div><span>Overwhelmed</span>
+                </div><div class="mood">
+                    <div class="mood-option" data-mood="anxious" style="background-color: #80e6e6;"></div><span>Anxious</span>
+                </div>
+                <div class="mood">
+                   <div class="mood-option" data-mood="normal" style="background-color: #e0e0e0;"></div><span>Normal</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="tired" style="background-color: #ffdb80;"></div><span>Tired</span>
+                </div>
+                <div class="mood">
+                     <div class="mood-option" data-mood="sad" style="background-color: #b3d9ff;"></div><span>Sad</span>
+                </div><div class="mood">
+                    <div class="mood-option" data-mood="stressed" style="background-color: #ff6666;"></div><span>Stressed</span>
+                </div>
+                <div class="mood">
+                   <div class="mood-option" data-mood="annoyed" style="background-color: #e6b3b3;"></div><span>Annoyed</span>
+                </div>
+                <div class="mood">
+                    <div class="mood-option" data-mood="sick" style="background-color: #cccccc;"></div><span>Sick</span>
+                </div>     
+
+                
+            
+            </div>
+            <button id="saveImageBtn">Save Current Mood Tracker</button>
+            <button id="saveImageBtn" onclick="location.href='gallery.html'">View Saved Image</button>
+            
+
         </div>
-        <div class="legend">
-            <div class="mood-option" data-mood="amazing" style="background-color: #ffb3b3;"></div><span>Amazing</span>
-            <div class="mood-option" data-mood="excited" style="background-color: #e6e6ff;"></div><span>Excited</span>
-            <div class="mood-option" data-mood="motivated" style="background-color: #b3ffb3;"></div><span>Motivated</span>
-            <div class="mood-option" data-mood="productive" style="background-color: #ffffb3;"></div><span>Productive</span>
-            <div class="mood-option" data-mood="normal" style="background-color: #e0e0e0;"></div><span>Normal</span>
-            <div class="mood-option" data-mood="tired" style="background-color: #ffdb80;"></div><span>Tired</span>
-            <div class="mood-option" data-mood="frustrated" style="background-color: #ffcc66;"></div><span>Frustrated</span>
-            <div class="mood-option" data-mood="overwhelmed" style="background-color: #ff9933;"></div><span>Overwhelmed</span>
-            <div class="mood-option" data-mood="anxious" style="background-color: #80e6e6;"></div><span>Anxious</span>
-            <div class="mood-option" data-mood="sad" style="background-color: #b3d9ff;"></div><span>Sad</span>
-            <div class="mood-option" data-mood="stressed" style="background-color: #ff6666;"></div><span>Stressed</span>
-            <div class="mood-option" data-mood="annoyed" style="background-color: #e6b3b3;"></div><span>Annoyed</span>
-            <div class="mood-option" data-mood="sick" style="background-color: #cccccc;"></div><span>Sick</span>
-        </div>
+
+    
+
+    
+
     </div>
-
-    
-    
-
-    
-
-    <button id="saveImageBtn">Save Current Mood Tracker</button>
+        
     <script src="script.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
