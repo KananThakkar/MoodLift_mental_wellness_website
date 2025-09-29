@@ -22,18 +22,37 @@
       margin-top: 30px;
     }
 
+    .back-btn {
+      display: block;
+      margin: 5px;
+      text-align: center;
+      background: #5C735F;
+      color: #FDF6EC;
+      padding: 10px;
+      text-decoration: none;
+      border-radius: 6px;
+      width: 30px;
+    }
+
+    .back-btn:hover {
+      background: transparent;
+      border: 1.5px solid #5C735F;
+      color: #5C735F;
+    }
     .gallery img {
       width: 100%;
       border: 2px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
+
     .btn{padding:8px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:700}
 .btn.del{background:#5C735F;border:1px solid #FDF6EC;color:#FDF6EC}
   </style>
 </head>
 <body>
   <div class="container">
+    <a class="back-btn" href="gratitude.html">←</a>
     <h1>Saved Gratitude Notes</h1>
     
     <div class="gallery" id="gallery"></div>
