@@ -1,0 +1,83 @@
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+body{
+    width: 100vw;
+    height: 100vh;
+    background-image: url(./image1.png);
+    background-size: contain;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+body>section{
+    width: 60%;
+    height: 70%;
+    border: 2px solid #5C735F;
+    display: flex;
+    border-radius: 10px;
+}
+body>section>aside{
+    width: 35%;
+    height: 100%;
+    background-color: #5C735F;
+    border-radius: 10px 0px 0px 10px;
+    color: #FDF6EC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+aside>h1{
+    font-size: 40px;
+    font-weight: 200;
+}
+body>section>form{
+    width: 65%;
+    height: 100%;
+    background-color: white;
+    border-radius: 0px 10px 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    color: #5C735F;
+}
+form>h2{
+    text-transform: uppercase;
+}
+form>input{
+    width: 70%;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    padding-left: 20px;
+    background-color: #FDF6EC;
+}
+form>input::placeholder{
+    font-size: 16px;
+}
+button{
+    width: 25%;
+    height: 40px;
+    border: none;
+    background-color: #5C735F;
+    color: #FDF6EC;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 5px;
+    transition: all 300ms;
+}
+button:hover{
+    background-color: transparent;
+    border: 1px solid #5C735F;
+    color: #5C735F;
+}
+a{
+    color: deepskyblue;
+    font-size: 15px;
+    font-weight: 400;
+}

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
-    <link rel="stylesheet" href="./register.css">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="./login.css">
     <link rel="shortcut icon" href="../favicon-32x321.png" type="image/x-icon">
 </head>
 <body>
@@ -12,15 +12,14 @@
         <aside>
             <h1>Mood Lift</h1>
         </aside>
-        <form action="register.php" method="POST">
-            <h2>Register</h2>
-            <input type="text" placeholder="Username" required id="uname" name="username" value="">
+        <form action="../login.php" method="POST">
+            <h2>Login</h2>
             <input type="email" placeholder="Email" required id="email" name="email" value="">
             <input type="password" placeholder="Password" required id="pswd" name="password" value="">
-            <button id="btn">Register</button>
-            <p>Already have an account?<a href="../Login Page/./login.html">Login here</a></p>
+            <button id="btn">Login</button>
+            <p>Don't have an account?<a href="../Register Page/./register.html">Register here</a></p>
         </form>
-        <script src="./register.js"></script>
+        <script src="./login.js"></script>
     </section>
 </body>
 </html>
