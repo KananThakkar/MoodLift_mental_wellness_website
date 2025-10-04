@@ -10,6 +10,9 @@
         *{
       font-family: cursive;
     }
+    body{
+        background-color: #FDF6EC;
+    }
         /* Specific CSS for the gallery page */
         .gallery-container {
             display: flex;
@@ -18,6 +21,7 @@
             gap: 30px;
             padding: 20px;
         }
+        
 
         .saved-image-card {
             border: 1px solid #ddd;
@@ -48,11 +52,29 @@
         .delete-btn:hover {
             background-color: #cc0000;
         }
+        .back-btn {
+      display: block;
+      margin: 5px;
+      text-align: center;
+      background: #5C735F;
+      color: #FDF6EC;
+      padding: 10px;
+      text-decoration: none;
+      border-radius: 6px;
+      width: 30px;
+    }
+
+    .back-btn:hover {
+      background: transparent;
+      border: 1.5px solid #5C735F;
+      color: #5C735F;
+    }
     </style>
 </head>
 <body>
-    <h1 style="color: #5C735F;">Saved Mood Trackers Gallery</h1>
-    <p><a href="../Mood Tracker/year3.html" style="color: #5C735F;">← Back to Mood Tracker </a></p>
+    <a href="./year3.html" class="back-btn">←</a>
+    <h1 style="color: #5C735F;">Saved Year-in-Pixels Trackers Gallery</h1>
+    
 
     <div id="galleryContainer" class="gallery-container">
         </div>
